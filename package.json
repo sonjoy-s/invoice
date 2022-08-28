@@ -2,10 +2,18 @@
   "name": "invoice",
   "version": "0.1.0",
   "description": "project to generate invoice online",
-  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "serve": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
   "author": "Sonjoy Samadder <sonjoy88@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "pdfmake": "^0.2.5"
+  },
+  "devDependencies": {
+    "vite": "^3.0.9"
   }
 }
