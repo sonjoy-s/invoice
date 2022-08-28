@@ -1,0 +1,11 @@
+{
+  "name": "invoice",
+  "version": "0.1.0",
+  "description": "project to generate invoice online",
+  "main": "index.js",
+  "author": "Sonjoy Samadder <sonjoy88@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "pdfmake": "^0.2.5"
+  }
+}
