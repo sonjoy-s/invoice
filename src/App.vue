@@ -1,17 +1,9 @@
 <template>
   <div>
-    <h3>{{ message }}</h3>
+    <Basic />
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
-
-const message = ref("Welcome");
+import Basic from "./components/templates/basic.vue";
 </script>
-
-<style scoped>
-h3 {
-  color: brown;
-}
-</style>
