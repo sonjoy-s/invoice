@@ -1,10 +1,8 @@
 <template>
   <div class="container">
     <div id="iframeContainer" v-html="svg"></div>
-    <button @click="download">Download</button>
   </div>
 </template>
-
 
 <script setup>
 import pdfMake from "pdfmake/build/pdfmake";
