@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <div>
+    <div class="preview">
       <Basic />
     </div>
-    <div>
+    <div class="settings">
       <Settings />
     </div>
   </div>
@@ -18,7 +18,12 @@ import Settings from "./components/Settings.vue";
 .container {
   display: flex;
 }
-.container > div {
-  flex: 50%;
+.container .preview {
+
+}
+
+.container .settings {
+  width: 300px;
+  padding: 10px 30px;
 }
 </style>

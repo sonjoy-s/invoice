@@ -16,11 +16,13 @@
       <label>Billed from:</label>
       <textarea v-model="settings.billedFrom" placeholder="Name & address"></textarea>
     </div>
-    <div>
+    <div class="settings-item-group">
       <div v-for="(item, index) in settings.items" class="settings-group" :key="item.id">
         <label>Item {{ index + 1 }}:</label>
-        <input v-model="item.title" type="text" placeholder="description" />
-        <input v-model="item.amount" type="number" placeholder="price" />
+        <div class="settings-group--inputs">
+          <input v-model="item.title" type="text" placeholder="description" />
+          <input v-model="item.amount" type="number" placeholder="price" />
+        </div>
       </div>
     </div>
     <div class="settings-group">
@@ -39,26 +41,37 @@
 </template>
 
 <script setup lang="ts">
-import {reactive} from "vue";
-
-const settings = reactive({
-  number: "",
-  date: "",
-  billedTo: "",
-  billedFrom: "",
-  items: [
-    {
-      id: "xw9g",
-      title: "",
-      amount: 0,
-    },
-    {
-      id: "dr2c",
-      title: "",
-      amount: 0,
-    }
-  ],
-  note: "",
-  signature: ""
-});
+import settings from "../compositions/settings.js";
 </script>
+
+<style>
+.settings-group {
+  margin-bottom: 10px;
+}
+.settings-group label {
+  display: block;
+  width: 100%;
+}
+
+.settings-group input, .settings-group textarea {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.settings-item-group .settings-group label {
+  width: 100%;
+}
+
+.settings-item-group .settings-group input[type=text] {
+  width: 70%;
+}
+
+.settings-item-group .settings-group input[type=number] {
+  width: 30%;
+}
+
+.settings-group--inputs {
+  display: flex;
+}
+</style>
