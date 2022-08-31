@@ -12,11 +12,16 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-const svg = `<svg width="595" height="842" viewBox="0 0 595 842" fill="none" xmlns="http://www.w3.org/2000/svg">
+const svg = `
+<svg width="595" height="842" viewBox="0 0 595 842" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="595" height="842" fill="white"/>
-<rect width="695" height="17" fill="#D9D9D9"/>
+<rect width="695" height="100" fill="#D9D9D9"/>
 <rect y="726" width="695" height="116" fill="#D9D9D9"/>
-<text x="0" y="0" fill="red" alignment-baseline="hanging" font-size="50">Invoice</text>
+<text x="20" y="50" fill="#000" alignment-baseline="hanging" font-size="50">Invoice</text>
+<text x="20" y="120" fill="#000" alignment-baseline="hanging" font-size="10">INVOICE NUMBER</text>
+<text x="20" y="135" fill="#000" alignment-baseline="hanging" font-size="10">SS202209</text>
+<text x="200" y="120" fill="#000" alignment-baseline="hanging" font-size="10">INVOICE DATE</text>
+<text x="200" y="135" fill="#000" alignment-baseline="hanging" font-size="10">31/08/2022</text>
 </svg>
 `;
 
@@ -30,7 +35,7 @@ const docDefinition = {
     width: 595,
     height: 842
   },
-  pageMargins: [ 0, 0, 0, 0 ],
+  pageMargins: [0, 0, 0, 0],
 };
 
 function download() {
