@@ -24,18 +24,24 @@ const svg = `
 <text x="200" y="135" fill="#000" alignment-baseline="hanging" font-size="10">31/08/2022</text>
 <text x="20" y="170" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold">BILLED TO</text>
 <text x="0" y="180" fill="#000" alignment-baseline="hanging" font-size="10">
+  <tspan x="20" dy="1.3em">Demon Ltd.</tspan>
   <tspan x="20" dy="1.3em">Akshya Nagar 1st Block 1st Cross,</tspan>
   <tspan x="20" dy="1.3em">Rammurthy nagar, Bangalore-560016</tspan>
 </text>
 <text x="200" y="170" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold">BILLED FROM</text>
 <text x="0" y="180" fill="#000" alignment-baseline="hanging" font-size="10">
+  <tspan x="200" dy="1.3em">Alex Doe</tspan>
   <tspan x="200" dy="1.3em">2633 Camden Street</tspan>
   <tspan x="200" dy="1.3em">Las Vegas</tspan>
   <tspan x="200" dy="1.3em">Phone: 775-253-1659</tspan>
 </text>
 
 <text x="20" y="270" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold">DESCRIPTION</text>
-<text x="500" y="270" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold">AMOUNT</text>
+<text x="20" y="290" fill="#000" alignment-baseline="hanging" font-size="10">Fixing services, August 2022</text>
+<text x="575" y="270" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold" text-anchor="end">AMOUNT</text>
+<text x="575" y="290" fill="#000" alignment-baseline="hanging" font-size="10" text-anchor="end">$500.00</text>
+
+<rect x="20" y="545" width="555" height="1" fill="#D9D9D9"/>
 </svg>
 `;
 
