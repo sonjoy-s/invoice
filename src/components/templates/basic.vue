@@ -17,7 +17,7 @@ const svg = `
 <rect width="595" height="842" fill="white"/>
 <rect width="695" height="100" fill="#D9D9D9"/>
 <rect y="822" width="695" height="20" fill="#D9D9D9"/>
-<text x="20" y="50" fill="#000" alignment-baseline="hanging" font-size="50">INVOICE</text>
+<text x="20" y="45" fill="#000" alignment-baseline="hanging" font-size="50">INVOICE</text>
 <text x="20" y="120" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold">INVOICE NUMBER</text>
 <text x="20" y="135" fill="#000" alignment-baseline="hanging" font-size="10">XX2022XX</text>
 <text x="200" y="120" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold">INVOICE DATE</text>
@@ -37,13 +37,17 @@ const svg = `
 </text>
 
 <text x="20" y="270" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold">DESCRIPTION</text>
-<text x="20" y="290" fill="#000" alignment-baseline="hanging" font-size="10">Fixing services, August 2022</text>
+<text y="280" fill="#000" alignment-baseline="hanging" font-size="10">
+<tspan x="20" dy="1.5em">Fixing services, August 2022</tspan><tspan x="20" dy="1.5em">Fixing services, September 2022</tspan>
+</text>
 <text x="575" y="270" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold" text-anchor="end">AMOUNT</text>
-<text x="575" y="290" fill="#000" alignment-baseline="hanging" font-size="10" text-anchor="end">$500.00</text>
+<text y="280" fill="#000" alignment-baseline="hanging" font-size="10" text-anchor="end">
+<tspan x="575" dy="1.5em">$500.00</tspan><tspan x="575" dy="1.5em">$500.00</tspan>
+</text>
 
 <rect x="20" y="545" width="555" height="1" fill="#D9D9D9"/>
 <text x="515" y="555" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold" text-anchor="end">TOTAL</text>
-<text x="575" y="555" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold" text-anchor="end">$500.00</text>
+<text x="575" y="555" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold" text-anchor="end">$1000.00</text>
 
 <text x="0" y="600" fill="#000" alignment-baseline="hanging" font-size="10">
   <tspan x="20" dy="1.3em" font-weight="bold">Note</tspan>
