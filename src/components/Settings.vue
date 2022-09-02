@@ -27,29 +27,53 @@
       </div>
     </div>
     <div class="settings-col">
-      <div class="settings-item-group">
-        <div v-for="(item, index) in settings.items" class="settings-group" :key="item.id">
-          <label>Item {{ index + 1 }}:</label>
-          <div class="settings-group--inputs">
-            <input v-model="item.title" type="text" placeholder="description"/>
-            <input v-model="item.amount" type="number" placeholder="price"/>
+      <div class="settings-item-group mb-3">
+        <div v-for="(item, index) in settings.items" :key="item.id" class="field">
+          <label class="label">Item {{ index + 1 }}:</label>
+          <div class="control">
+            <div class="is-flex">
+              <input v-model="item.title" type="text" class="input mr-2" placeholder="description"/>
+              <input v-model="item.amount" type="number" class="input amount" placeholder="price"/>
+            </div>
           </div>
         </div>
       </div>
-      <div class="settings-group">
-        <label>Note:</label>
-        <textarea v-model="settings.note" placeholder="Name & address"></textarea>
+      <div class="field">
+      <label class="label">Note:</label>
+      <div class="control">
+        <textarea v-model="settings.note" class="textarea" placeholder="note here"></textarea>
       </div>
-      <div class="settings-group">
-        <label>Signature:</label>
-        <div v-if="settings.signature.data">
-          <img alt="signature" :src="settings.signature.data" :width="settings.signature.width" :height="settings.signature.height">
+    </div>
+      <div class="field field__file">
+        <label class="label">Signature:</label>
+        <div class="is-flex">
+          <img
+            v-if="settings.signature.data"
+            :src="settings.signature.data"
+            :width="settings.signature.width"
+            :height="settings.signature.height" alt="signature"
+            class="mr-3"
+          />
+          <div class="file-upload">
+            <label>
+              <span class="button is-primary is-small">Upload signature</span>
+              <input id="imgFile" type="file" accept="image/*" />
+            </label>
+          </div>
         </div>
-        <input id="imgFile" type="file" accept="image/*"/>
       </div>
+      <hr>
       <div>
-        <button>Load JSON</button>
-        <button>Download JSON</button>
+        <span class="label">Invoice</span>
+        <div class="is-flex">
+          <div class="file-upload mr-3">
+            <label>
+              <span class="button is-primary is-small">Load JSON</span>
+              <input id="jsonFile" type="file" accept="application/json" />
+            </label>
+          </div>
+          <button @click="saveJson" class="button is-info is-small">Save JSON</button>
+        </div>
       </div>
     </div>
   </div>
@@ -90,43 +114,40 @@ function readFile(ev) {
   FR.readAsDataURL(ev.target.files[0]);
 }
 
+function loadFile(ev) {
+  if (!ev) {
+    return;
+  }
+
+  const FR = new FileReader();
+
+  FR.addEventListener("load", function (evt) {
+    const data = JSON.parse(evt.target.result as string);
+
+    Object.keys(data).map(key => {
+      settings[key] = data[key];
+    });
+  });
+
+  FR.readAsText(ev.target.files[0]);
+}
+
+function saveJson() {
+  const a = document.createElement("a");
+  const file = new Blob([JSON.stringify(settings)], {type: "application/json"});
+
+  a.href = URL.createObjectURL(file);
+  a.download = "invoice";
+  a.click();
+}
+
 onMounted(function () {
   document.querySelector("#imgFile").addEventListener("change", readFile);
+  document.querySelector("#jsonFile").addEventListener("change", loadFile);
 });
 </script>
 
 <style>
-.settings-group {
-  margin-bottom: 10px;
-}
-
-.settings-group label {
-  display: block;
-  width: 100%;
-}
-
-.settings-group input, .settings-group textarea {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-}
-
-.settings-item-group .settings-group label {
-  width: 100%;
-}
-
-.settings-item-group .settings-group input[type=text] {
-  width: 70%;
-}
-
-.settings-item-group .settings-group input[type=number] {
-  width: 30%;
-}
-
-.settings-group--inputs {
-  display: flex;
-}
-
 .settings-cols {
   display: flex;
   padding-left: 15px;
@@ -137,5 +158,19 @@ onMounted(function () {
   width: 300px;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.amount {
+  width: 80px;
+}
+
+.file-upload label {
+  position: relative;
+}
+
+.file-upload span {}
+.file-upload input {
+  visibility: hidden;
+  position: absolute;
 }
 </style>
