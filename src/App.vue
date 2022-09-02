@@ -1,17 +1,29 @@
 <template>
-  <div>
-    <h3>{{ message }}</h3>
+  <div class="container">
+    <div class="preview">
+      <Basic />
+    </div>
+    <div class="settings">
+      <Settings />
+    </div>
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
-
-const message = ref("Welcome");
+import Basic from "./components/templates/basic.vue";
+import Settings from "./components/Settings.vue";
 </script>
 
-<style scoped>
-h3 {
-  color: brown;
+<style lang="css">
+.container {
+  display: flex;
+}
+.container .preview {
+
+}
+
+.container .settings {
+  width: 300px;
+  padding: 10px 30px;
 }
 </style>
