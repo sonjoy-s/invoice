@@ -1,6 +1,4 @@
-body {
-  background-color: aliceblue;
-}
+@import "../node_modules/bulma/css/bulma.min.css";
 
 *, *::before, *::after {
   box-sizing: border-box;
