@@ -56,7 +56,7 @@
           />
           <div class="file-upload">
             <label>
-              <span class="button is-primary is-small">Upload signature</span>
+              <span class="button is-info is-light is-small">Upload signature</span>
               <input id="imgFile" type="file" accept="image/*" />
             </label>
           </div>
@@ -64,24 +64,30 @@
       </div>
       <hr>
       <div>
-        <span class="label">Invoice</span>
-        <div class="is-flex mb-3">
-          <button @click="download" class="button is-info is-small mr-3">Download</button>
-          <div class="file-upload mr-3">
-            <label>
-              <span class="button is-primary is-small">Load JSON</span>
-              <input id="jsonFile" type="file" accept="application/json" />
-            </label>
-          </div>
-          <button @click="saveJson" class="button is-info is-small">Save JSON</button>
+        <div class="tabs">
+          <ul>
+            <li :class="{ 'is-active': tab === 'pdf'}"><a @click="tab = 'pdf'">PDF</a></li>
+            <li :class="{ 'is-active': tab === 'localStorage'}"><a @click="tab = 'localStorage'">LocalStorage</a></li>
+            <li :class="{ 'is-active': tab === 'json'}" @click="tab = 'json'"><a>JSON</a></li>
+          </ul>
         </div>
-      </div>
-      <hr>
-      <div>
-        <span class="label">LocalStorage</span>
-        <div class="is-flex">
-          <button class="button is-primary is-small mr-3">Load</button>
-          <button class="button is-info is-small">Save</button>
+        <div v-if="tab === 'pdf'" class="tab-content">
+          <button @click="download" class="button is-primary is-small">Download invoice</button>
+        </div>
+        <div v-if="tab === 'localStorage'" class="tab-content">
+          <button class="button is-info is-small mr-3">Open</button>
+          <button class="button is-info is-light is-small">Save</button>
+        </div>
+        <div v-if="tab === 'json'" class="tab-content">
+          <div class="is-flex mb-3">
+            <div class="file-upload mr-3">
+              <label>
+                <span class="button is-info is-small">Import</span>
+                <input id="jsonFile" type="file" accept="application/json" />
+              </label>
+            </div>
+            <button @click="saveJson" class="button is-info is-light is-small">Export</button>
+          </div>
         </div>
       </div>
     </div>
@@ -89,12 +95,17 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted} from "vue";
+import {onMounted, ref} from "vue";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import settings from "../compositions/settings.js";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+/*
+ * Refs
+ */
+const tab = ref<"pdf" | "localStorage" | "json">("pdf");
 
 function readFile(ev) {
   if (!ev) {
