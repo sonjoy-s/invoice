@@ -25,7 +25,7 @@
         </text>
         <text x="575" y="270" fill="#000" alignment-baseline="hanging" font-size="10" font-weight="bold" text-anchor="end">AMOUNT</text>
         <text y="280" fill="#000" alignment-baseline="hanging" font-size="10" text-anchor="end">
-          <tspan v-for="item in settings.items" x="575" dy="1.5em">${{ item.amount || 0 }}</tspan>
+          <tspan v-for="item in settings.items" x="575" dy="1.5em">${{ formatNumber(item.amount) }}</tspan>
         </text>
 
         <rect x="20" y="545" width="555" height="1" fill="#D9D9D9"/>
@@ -48,8 +48,16 @@ import { computed } from "vue";
 import settings from "../../compositions/settings.js";
 
 const total = computed(function() {
-  return settings.items.reduce((acc, item) => acc + (item.amount || 0), 0);
+  return formatNumber(settings.items.reduce((acc, item) => acc + (item.amount || 0), 0));
 });
+
+function formatNumber(number) {
+  if (typeof number !== "number") {
+    return "0.00"
+  }
+
+  return number.toFixed(2);
+}
 </script>
 
 <style lang="css">
