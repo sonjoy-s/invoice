@@ -65,7 +65,8 @@
       <hr>
       <div>
         <span class="label">Invoice</span>
-        <div class="is-flex">
+        <div class="is-flex mb-3">
+          <button @click="download" class="button is-info is-small mr-3">Download</button>
           <div class="file-upload mr-3">
             <label>
               <span class="button is-primary is-small">Load JSON</span>
@@ -75,13 +76,25 @@
           <button @click="saveJson" class="button is-info is-small">Save JSON</button>
         </div>
       </div>
+      <hr>
+      <div>
+        <span class="label">LocalStorage</span>
+        <div class="is-flex">
+          <button class="button is-primary is-small mr-3">Load</button>
+          <button class="button is-info is-small">Save</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import settings from "../compositions/settings.js";
 import {onMounted} from "vue";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import settings from "../compositions/settings.js";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function readFile(ev) {
   if (!ev) {
@@ -139,6 +152,23 @@ function saveJson() {
   a.href = URL.createObjectURL(file);
   a.download = "invoice";
   a.click();
+}
+
+function download() {
+  const docDefinition = {
+    content: [
+      {
+        "svg": document.getElementById("iframeContainer").innerHTML
+      }
+    ],
+    pageSize: {
+      width: 595,
+      height: 842
+    },
+    pageMargins: [0, 0, 0, 0],
+  };
+
+  pdfMake.createPdf(docDefinition).download("invoice");
 }
 
 onMounted(function () {
