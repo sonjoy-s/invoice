@@ -57,7 +57,7 @@
           <div class="file-upload">
             <label>
               <span class="button is-info is-light is-small">Upload signature</span>
-              <input id="imgFile" type="file" accept="image/*" />
+              <input id="imgFile" type="file" accept="image/*" @change="readFile" />
             </label>
           </div>
         </div>
@@ -83,7 +83,7 @@
             <div class="file-upload mr-3">
               <label>
                 <span class="button is-info is-small">Import</span>
-                <input id="jsonFile" type="file" accept="application/json" />
+                <input id="jsonFile" type="file" accept="application/json" @change="loadFile" />
               </label>
             </div>
             <button @click="saveJson" class="button is-info is-light is-small">Export</button>
@@ -181,11 +181,6 @@ function download() {
 
   pdfMake.createPdf(docDefinition).download("invoice");
 }
-
-onMounted(function () {
-  document.querySelector("#imgFile").addEventListener("change", readFile);
-  document.querySelector("#jsonFile").addEventListener("change", loadFile);
-});
 </script>
 
 <style>
