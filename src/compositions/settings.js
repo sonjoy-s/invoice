@@ -1,7 +1,7 @@
 import {reactive} from "vue";
 
 export default reactive({
-  number: "XX",
+  number: "",
   date: "",
   billedTo: "",
   billedFrom: "",

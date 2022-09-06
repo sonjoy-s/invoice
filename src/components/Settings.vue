@@ -4,46 +4,55 @@
       <div class="field">
         <label class="label">Invoice number</label>
         <div class="control">
-          <input v-model="settings.number" class="input" type="text" placeholder="xx-number">
+          <input v-model="settings.number" class="input is-small" type="text" placeholder="invoice-082022">
         </div>
       </div>
       <div class="field">
         <label class="label">Invoice date</label>
         <div class="control">
-          <input v-model="settings.date" class="input" type="date" placeholder="xx-number">
+          <input v-model="settings.date" class="input is-small" type="date" placeholder="xx-number">
         </div>
       </div>
       <div class="field">
-        <label class="label">Billed to:</label>
+        <label class="label">Billed to</label>
         <div class="control">
-          <textarea v-model="settings.billedTo" class="textarea" placeholder="Name & address"></textarea>
+          <textarea v-model="settings.billedTo" class="textarea is-small" placeholder="Name & address"></textarea>
         </div>
       </div>
       <div class="field">
-        <label class="label">Billed from:</label>
+        <label class="label">Billed from</label>
         <div class="control">
-          <textarea v-model="settings.billedFrom" class="textarea" placeholder="Name & address"></textarea>
+          <textarea v-model="settings.billedFrom" class="textarea is-small" placeholder="Name & address"></textarea>
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Note</label>
+        <div class="control">
+          <textarea v-model="settings.note" class="textarea is-small" placeholder="note here"></textarea>
         </div>
       </div>
     </div>
     <div class="settings-col">
       <div class="settings-item-group mb-3">
         <div v-for="(item, index) in settings.items" :key="item.id" class="field">
-          <label class="label">Item {{ index + 1 }}:</label>
+          <label class="label is-flex is-align-content-center is-justify-content-space-between">
+            <span>Item [{{ index + 1 }}]</span>
+            <span v-if="settings.items.length > 1" @click="removeItem(index)" class="remove">
+              <Minus />
+            </span>
+          </label>
           <div class="control">
             <div class="is-flex">
-              <input v-model="item.title" type="text" class="input mr-2" placeholder="description"/>
-              <input v-model="item.amount" type="number" class="input amount" placeholder="price"/>
+              <input v-model="item.title" type="text" class="input is-small mr-2" placeholder="description"/>
+              <input v-model="item.amount" type="number" class="input is-small amount" placeholder="price"/>
             </div>
           </div>
         </div>
+        <button @click="addItem" class="button is-small is-info">
+          <Plus />
+          <span>New item</span>
+        </button>
       </div>
-      <div class="field">
-      <label class="label">Note:</label>
-      <div class="control">
-        <textarea v-model="settings.note" class="textarea" placeholder="note here"></textarea>
-      </div>
-    </div>
       <div class="field field__file">
         <label class="label">Signature:</label>
         <div class="is-flex">
@@ -56,7 +65,10 @@
           />
           <div class="file-upload">
             <label>
-              <span class="button is-info is-light is-small">Upload signature</span>
+              <span class="button is-info is-light is-small">
+                <Upload />
+                <span>Upload signature</span>
+              </span>
               <input id="imgFile" type="file" accept="image/*" @change="readFile" />
             </label>
           </div>
@@ -72,7 +84,10 @@
           </ul>
         </div>
         <div v-if="tab === 'pdf'" class="tab-content">
-          <button @click="download" class="button is-primary is-small">Download invoice</button>
+          <button @click="download" class="button is-primary is-small">
+            <Download />
+            <span>Download invoice</span>
+          </button>
         </div>
         <div v-if="tab === 'localStorage'" class="tab-content">
           <button class="button is-info is-small mr-3">Open</button>
@@ -95,10 +110,14 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import { ref } from "vue";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import settings from "../compositions/settings.js";
+import Plus from "./icons/Plus.vue";
+import Minus from "./icons/Minus.vue";
+import Download from "./icons/Download.vue";
+import Upload from "./icons/Upload.vue";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -181,6 +200,18 @@ function download() {
 
   pdfMake.createPdf(docDefinition).download("invoice");
 }
+
+function addItem() {
+  settings.items.push({
+    id: Math.random().toString(36).slice(2, 7),
+    title: "Item",
+    amount: 0
+  });
+}
+
+function removeItem(index) {
+  settings.items.splice(index, 1);
+}
 </script>
 
 <style>
@@ -208,5 +239,30 @@ function download() {
 .file-upload input {
   visibility: hidden;
   position: absolute;
+}
+
+.button svg {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+
+.button.is-primary svg,
+.button.is-info svg{
+  fill: #fff;
+}
+
+.button.is-info.is-light svg {
+  fill: #296fa8;
+}
+
+.remove {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.remove svg {
+  width: 15px;
+  height: 15px;
 }
 </style>

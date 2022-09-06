@@ -19,7 +19,8 @@ import Settings from "./components/Settings.vue";
   display: flex;
 }
 .app-container .preview {
-
+  width: 595px;
+  height: 842px;
 }
 
 .app-container .settings {
