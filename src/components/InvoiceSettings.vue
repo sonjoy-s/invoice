@@ -4,52 +4,94 @@
       <div class="field">
         <label class="label">Invoice number</label>
         <div class="control">
-          <input v-model="settings.number" class="input is-small" type="text" placeholder="invoice-082022">
+          <input
+            v-model="settings.number"
+            class="input is-small"
+            type="text"
+            placeholder="invoice-082022"
+          />
         </div>
       </div>
       <div class="field">
         <label class="label">Invoice date</label>
         <div class="control">
-          <input v-model="settings.date" class="input is-small" type="date" placeholder="xx-number">
+          <input
+            v-model="settings.date"
+            class="input is-small"
+            type="date"
+            placeholder="xx-number"
+          />
         </div>
       </div>
       <div class="field">
         <label class="label">Billed to</label>
         <div class="control">
-          <textarea v-model="settings.billedTo" class="textarea is-small" placeholder="Name & address"></textarea>
+          <textarea
+            v-model="settings.billedTo"
+            class="textarea is-small"
+            placeholder="Name & address"
+          ></textarea>
         </div>
       </div>
       <div class="field">
         <label class="label">Billed from</label>
         <div class="control">
-          <textarea v-model="settings.billedFrom" class="textarea is-small" placeholder="Name & address"></textarea>
+          <textarea
+            v-model="settings.billedFrom"
+            class="textarea is-small"
+            placeholder="Name & address"
+          ></textarea>
         </div>
       </div>
       <div class="field">
         <label class="label">Note</label>
         <div class="control">
-          <textarea v-model="settings.note" class="textarea is-small" placeholder="note here"></textarea>
+          <textarea
+            v-model="settings.note"
+            class="textarea is-small"
+            placeholder="note here"
+          ></textarea>
         </div>
       </div>
     </div>
     <div class="settings-col">
       <div class="settings-item-group mb-3">
-        <div v-for="(item, index) in settings.items" :key="item.id" class="field">
-          <label class="label is-flex is-align-content-center is-justify-content-space-between">
+        <div
+          v-for="(item, index) in settings.items"
+          :key="item.id"
+          class="field"
+        >
+          <label
+            class="label is-flex is-align-content-center is-justify-content-space-between"
+          >
             <span>Item [{{ index + 1 }}]</span>
-            <span v-if="settings.items.length > 1" @click="removeItem(index)" class="remove">
-              <Minus />
+            <span
+              v-if="settings.items.length > 1"
+              class="remove"
+              @click="removeItem(index)"
+            >
+              <MinusIcon />
             </span>
           </label>
           <div class="control">
             <div class="is-flex">
-              <input v-model="item.title" type="text" class="input is-small mr-2" placeholder="description"/>
-              <input v-model="item.amount" type="number" class="input is-small amount" placeholder="price"/>
+              <input
+                v-model="item.title"
+                type="text"
+                class="input is-small mr-2"
+                placeholder="description"
+              />
+              <input
+                v-model="item.amount"
+                type="number"
+                class="input is-small amount"
+                placeholder="price"
+              />
             </div>
           </div>
         </div>
-        <button @click="addItem" class="button is-small is-info">
-          <Plus />
+        <button class="button is-small is-info" @click="addItem">
+          <PlusIcon />
           <span>New item</span>
         </button>
       </div>
@@ -59,7 +101,8 @@
           <img
             :src="settings.signature.data"
             :width="settings.signature.width"
-            :height="settings.signature.height" alt="signature"
+            :height="settings.signature.height"
+            alt="signature"
             class="mr-3"
           />
         </div>
@@ -67,29 +110,44 @@
           <div class="file-upload">
             <label>
               <span class="button is-info is-light is-small">
-                <Upload />
+                <UploadIcon />
                 <span>Upload</span>
               </span>
-              <input id="imgFile" type="file" accept="image/*" @change="uploadSignature" />
+              <input
+                id="imgFile"
+                type="file"
+                accept="image/*"
+                @change="uploadSignature"
+              />
             </label>
-            <button v-if="settings.signature.data" @click="removeSignature" class="button is-danger is-light is-small ml-3">
+            <button
+              v-if="settings.signature.data"
+              class="button is-danger is-light is-small ml-3"
+              @click="removeSignature"
+            >
               <span>Remove</span>
             </button>
           </div>
         </div>
       </div>
-      <hr>
+      <hr />
       <div>
         <div class="tabs">
           <ul>
-            <li :class="{ 'is-active': tab === 'pdf'}"><a @click="tab = 'pdf'">PDF</a></li>
-            <li :class="{ 'is-active': tab === 'localStorage'}"><a @click="tab = 'localStorage'">LocalStorage</a></li>
-            <li :class="{ 'is-active': tab === 'json'}" @click="tab = 'json'"><a>JSON</a></li>
+            <li :class="{ 'is-active': tab === 'pdf' }">
+              <a @click="tab = 'pdf'">PDF</a>
+            </li>
+            <li :class="{ 'is-active': tab === 'localStorage' }">
+              <a @click="tab = 'localStorage'">LocalStorage</a>
+            </li>
+            <li :class="{ 'is-active': tab === 'json' }" @click="tab = 'json'">
+              <a>JSON</a>
+            </li>
           </ul>
         </div>
         <div v-if="tab === 'pdf'" class="tab-content">
-          <button @click="download" class="button is-primary is-small">
-            <Download />
+          <button class="button is-primary is-small" @click="download">
+            <DownloadIcon />
             <span>Download invoice</span>
           </button>
         </div>
@@ -102,10 +160,17 @@
             <div class="file-upload mr-3">
               <label>
                 <span class="button is-info is-small">Import</span>
-                <input id="jsonFile" type="file" accept="application/json" @change="loadFile" />
+                <input
+                  id="jsonFile"
+                  type="file"
+                  accept="application/json"
+                  @change="loadFile"
+                />
               </label>
             </div>
-            <button @click="saveJson" class="button is-info is-light is-small">Export</button>
+            <button class="button is-info is-light is-small" @click="saveJson">
+              Export
+            </button>
           </div>
         </div>
       </div>
@@ -118,10 +183,11 @@ import { ref } from "vue";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import settings from "../compositions/settings.js";
-import Plus from "./icons/Plus.vue";
-import Minus from "./icons/Minus.vue";
-import Download from "./icons/Download.vue";
-import Upload from "./icons/Upload.vue";
+import PlusIcon from "./icons/PlusIcon.vue";
+import MinusIcon from "./icons/MinusIcon.vue";
+import DownloadIcon from "./icons/DownloadIcon.vue";
+import UploadIcon from "./icons/UploadIcon.vue";
+import {TDocumentDefinitions} from "pdfmake/interfaces";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -177,7 +243,7 @@ function loadFile(ev) {
   FR.addEventListener("load", function (evt) {
     const data = JSON.parse(evt.target.result as string);
 
-    Object.keys(data).map(key => {
+    Object.keys(data).map((key) => {
       settings[key] = data[key];
     });
   });
@@ -187,7 +253,9 @@ function loadFile(ev) {
 
 function saveJson() {
   const a = document.createElement("a");
-  const file = new Blob([JSON.stringify(settings)], {type: "application/json"});
+  const file = new Blob([JSON.stringify(settings)], {
+    type: "application/json",
+  });
 
   a.href = URL.createObjectURL(file);
   a.download = "invoice";
@@ -195,15 +263,15 @@ function saveJson() {
 }
 
 function download() {
-  const docDefinition = {
+  const docDefinition: TDocumentDefinitions = {
     content: [
       {
-        "svg": document.getElementById("iframeContainer").innerHTML
-      }
+        svg: document.getElementById("iframeContainer").innerHTML,
+      },
     ],
     pageSize: {
       width: 595,
-      height: 842
+      height: 842,
     },
     pageMargins: [0, 0, 0, 0],
   };
@@ -215,7 +283,7 @@ function addItem() {
   settings.items.push({
     id: Math.random().toString(36).slice(2, 7),
     title: "Item",
-    amount: 0
+    amount: 0,
   });
 }
 
@@ -245,7 +313,8 @@ function removeItem(index) {
   position: relative;
 }
 
-.file-upload span {}
+.file-upload span {
+}
 .file-upload input {
   visibility: hidden;
   position: absolute;
@@ -258,7 +327,7 @@ function removeItem(index) {
 }
 
 .button.is-primary svg,
-.button.is-info svg{
+.button.is-info svg {
   fill: #fff;
 }
 
