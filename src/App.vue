@@ -1,17 +1,17 @@
 <template>
   <div class="app-container">
     <div class="preview">
-      <Basic />
+      <BasicTemplate />
     </div>
     <div class="settings">
-      <Settings />
+      <InvoiceSettings />
     </div>
   </div>
 </template>
 
 <script setup>
-import Basic from "./components/templates/basic.vue";
-import Settings from "./components/Settings.vue";
+import BasicTemplate from "./components/templates/BasicTemplate.vue";
+import InvoiceSettings from "./components/InvoiceSettings.vue";
 </script>
 
 <style lang="css" scoped>
