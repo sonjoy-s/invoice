@@ -54,23 +54,27 @@
         </button>
       </div>
       <div class="field field__file">
-        <label class="label">Signature:</label>
-        <div class="is-flex">
+        <label class="label">Signature</label>
+        <div v-if="settings.signature.data" class="is-flex mb-3">
           <img
-            v-if="settings.signature.data"
             :src="settings.signature.data"
             :width="settings.signature.width"
             :height="settings.signature.height" alt="signature"
             class="mr-3"
           />
+        </div>
+        <div class="is-flex">
           <div class="file-upload">
             <label>
               <span class="button is-info is-light is-small">
                 <Upload />
-                <span>Upload signature</span>
+                <span>Upload</span>
               </span>
-              <input id="imgFile" type="file" accept="image/*" @change="readFile" />
+              <input id="imgFile" type="file" accept="image/*" @change="uploadSignature" />
             </label>
+            <button v-if="settings.signature.data" @click="removeSignature" class="button is-danger is-light is-small ml-3">
+              <span>Remove</span>
+            </button>
           </div>
         </div>
       </div>
@@ -126,7 +130,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
  */
 const tab = ref<"pdf" | "localStorage" | "json">("pdf");
 
-function readFile(ev) {
+function uploadSignature(ev) {
   if (!ev) {
     return;
   }
@@ -155,6 +159,12 @@ function readFile(ev) {
   });
 
   FR.readAsDataURL(ev.target.files[0]);
+}
+
+function removeSignature() {
+  settings.signature.height = 0;
+  settings.signature.width = 0;
+  settings.signature.data = null;
 }
 
 function loadFile(ev) {
