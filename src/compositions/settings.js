@@ -1,21 +1,16 @@
 import { reactive } from "vue";
 
-export default reactive({
+const defaultSettings = {
   number: "",
   date: "",
   billedTo: "",
   billedFrom: "",
   items: [
     {
-      id: "xw9g",
-      title: "Service 1",
-      amount: 199,
-    },
-    {
-      id: "dr2c",
-      title: "Service 2",
-      amount: 21,
-    },
+      id: randomId(),
+      title: "Billed item name",
+      amount: 0,
+    }
   ],
   note: "",
   signature: {
@@ -23,4 +18,22 @@ export default reactive({
     height: 35,
     width: 100,
   },
+};
+
+function randomId() {
+  return Math.random().toString(36).slice(2, 7);
+}
+
+function getDefaultSettings() {
+  return JSON.parse(JSON.stringify(defaultSettings));
+}
+
+const state = reactive({
+  settings: getDefaultSettings()
 });
+
+export function resetSettings() {
+  state.settings = getDefaultSettings();
+}
+
+export default state;

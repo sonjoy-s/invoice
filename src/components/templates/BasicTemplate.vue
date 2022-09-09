@@ -36,7 +36,7 @@
         alignment-baseline="hanging"
         font-size="10"
       >
-        {{ settings.number }}
+        {{ state.settings.number }}
       </text>
       <text
         x="200"
@@ -55,7 +55,7 @@
         alignment-baseline="hanging"
         font-size="10"
       >
-        {{ settings.date }}
+        {{ state.settings.date }}
       </text>
       <text
         x="20"
@@ -74,7 +74,7 @@
         alignment-baseline="hanging"
         font-size="10"
       >
-        <tspan v-for="(line, index) in settings.billedTo.split('\n')" :key="index" x="20" dy="1.3em">
+        <tspan v-for="(line, index) in state.settings.billedTo.split('\n')" :key="index" x="20" dy="1.3em">
           {{ line }}
         </tspan>
       </text>
@@ -96,7 +96,7 @@
         font-size="10"
       >
         <tspan
-          v-for="(line, index) in settings.billedFrom.split('\n')"
+          v-for="(line, index) in state.settings.billedFrom.split('\n')"
           :key="index"
           x="200"
           dy="1.3em"
@@ -115,7 +115,7 @@
         DESCRIPTION
       </text>
       <text y="280" fill="#000" alignment-baseline="hanging" font-size="10">
-        <tspan v-for="item in settings.items" :key="item.id" x="20" dy="1.5em">
+        <tspan v-for="item in state.settings.items" :key="item.id" x="20" dy="1.5em">
           {{ item.title }}
         </tspan>
       </text>
@@ -137,7 +137,7 @@
         font-size="10"
         text-anchor="end"
       >
-        <tspan v-for="item in settings.items" :key="item.id" x="575" dy="1.5em">
+        <tspan v-for="item in state.settings.items" :key="item.id" x="575" dy="1.5em">
           ${{ formatNumber(item.amount) }}
         </tspan>
       </text>
@@ -172,17 +172,17 @@
         font-size="10"
       >
         <tspan x="20" dy="1.3em" font-weight="bold">Note</tspan>
-        <tspan v-for="(line, index) in settings.note.split('\n')" :key="index" x="20" dy="1.3em">
+        <tspan v-for="(line, index) in state.settings.note.split('\n')" :key="index" x="20" dy="1.3em">
           {{ line }}
         </tspan>
       </text>
       <image
-        v-if="settings.signature.data"
+        v-if="state.settings.signature.data"
         x="475"
         y="600"
-        :width="settings.signature.width"
-        :height="settings.signature.height"
-        :href="settings.signature.data"
+        :width="state.settings.signature.width"
+        :height="state.settings.signature.height"
+        :href="state.settings.signature.data"
       />
     </svg>
   </div>
@@ -190,11 +190,11 @@
 
 <script setup>
 import { computed } from "vue";
-import settings from "../../compositions/settings.js";
+import state from "../../compositions/settings.js";
 
 const total = computed(function () {
   return formatNumber(
-    settings.items.reduce((acc, item) => acc + (item.amount || 0), 0)
+    state.settings.items.reduce((acc, item) => acc + (item.amount || 0), 0)
   );
 });
 

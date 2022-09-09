@@ -5,7 +5,7 @@
         <label class="label">Invoice number</label>
         <div class="control">
           <input
-            v-model="settings.number"
+            v-model="state.settings.number"
             class="input is-small"
             type="text"
             placeholder="invoice-082022"
@@ -16,7 +16,7 @@
         <label class="label">Invoice date</label>
         <div class="control">
           <input
-            v-model="settings.date"
+            v-model="state.settings.date"
             class="input is-small"
             type="date"
             placeholder="xx-number"
@@ -27,7 +27,7 @@
         <label class="label">Billed to</label>
         <div class="control">
           <textarea
-            v-model="settings.billedTo"
+            v-model="state.settings.billedTo"
             class="textarea is-small"
             placeholder="Name & address"
           ></textarea>
@@ -37,7 +37,7 @@
         <label class="label">Billed from</label>
         <div class="control">
           <textarea
-            v-model="settings.billedFrom"
+            v-model="state.settings.billedFrom"
             class="textarea is-small"
             placeholder="Name & address"
           ></textarea>
@@ -47,7 +47,7 @@
         <label class="label">Note</label>
         <div class="control">
           <textarea
-            v-model="settings.note"
+            v-model="state.settings.note"
             class="textarea is-small"
             placeholder="note here"
           ></textarea>
@@ -57,7 +57,7 @@
     <div class="settings-col">
       <div class="settings-item-group mb-3">
         <div
-          v-for="(item, index) in settings.items"
+          v-for="(item, index) in state.settings.items"
           :key="item.id"
           class="field"
         >
@@ -66,7 +66,7 @@
           >
             <span>Item [{{ index + 1 }}]</span>
             <span
-              v-if="settings.items.length > 1"
+              v-if="state.settings.items.length > 1"
               class="remove"
               @click="removeItem(index)"
             >
@@ -97,11 +97,11 @@
       </div>
       <div class="field field__file">
         <label class="label">Signature</label>
-        <div v-if="settings.signature.data" class="is-flex mb-3">
+        <div v-if="state.settings.signature.data" class="is-flex mb-3">
           <img
-            :src="settings.signature.data"
-            :width="settings.signature.width"
-            :height="settings.signature.height"
+            :src="state.settings.signature.data"
+            :width="state.settings.signature.width"
+            :height="state.settings.signature.height"
             alt="signature"
             class="mr-3"
           />
@@ -121,7 +121,7 @@
               />
             </label>
             <button
-              v-if="settings.signature.data"
+              v-if="state.settings.signature.data"
               class="button is-danger is-light is-small ml-3"
               @click="removeSignature"
             >
@@ -149,6 +149,9 @@
           <button class="button is-primary is-small" @click="download">
             <DownloadIcon />
             <span>Download invoice</span>
+          </button>
+          <button class="button is-danger is-light is-small ml-3" @click="resetSettings">
+            Reset
           </button>
         </div>
         <div v-if="tab === 'localStorage'" class="tab-content">
@@ -182,7 +185,8 @@
 import { ref } from "vue";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import settings from "../compositions/settings.js";
+import state from "../compositions/settings.js";
+import { resetSettings } from "../compositions/settings.js";
 import PlusIcon from "./icons/PlusIcon.vue";
 import MinusIcon from "./icons/MinusIcon.vue";
 import DownloadIcon from "./icons/DownloadIcon.vue";
@@ -215,9 +219,9 @@ function uploadSignature(ev) {
     canvas.width = width;
     ctx.drawImage(image, 0, 0, width, height);
 
-    settings.signature.height = height;
-    settings.signature.width = width;
-    settings.signature.data = canvas.toDataURL();
+    state.settings.signature.height = height;
+    state.settings.signature.width = width;
+    state.settings.signature.data = canvas.toDataURL();
   };
 
   FR.addEventListener("load", function (evt) {
@@ -228,9 +232,9 @@ function uploadSignature(ev) {
 }
 
 function removeSignature() {
-  settings.signature.height = 0;
-  settings.signature.width = 0;
-  settings.signature.data = null;
+  state.settings.signature.height = 0;
+  state.settings.signature.width = 0;
+  state.settings.signature.data = null;
 }
 
 function loadFile(ev) {
@@ -280,7 +284,7 @@ function download() {
 }
 
 function addItem() {
-  settings.items.push({
+  state.settings.items.push({
     id: Math.random().toString(36).slice(2, 7),
     title: "Item",
     amount: 0,
@@ -288,7 +292,7 @@ function addItem() {
 }
 
 function removeItem(index) {
-  settings.items.splice(index, 1);
+  state.settings.items.splice(index, 1);
 }
 </script>
 
