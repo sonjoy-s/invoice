@@ -14,7 +14,7 @@
         x="20"
         y="45"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="50"
       >
         INVOICE
@@ -23,7 +23,7 @@
         x="20"
         y="120"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
       >
@@ -33,7 +33,7 @@
         x="20"
         y="135"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
       >
         {{ state.settings.number }}
@@ -42,7 +42,7 @@
         x="200"
         y="120"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
       >
@@ -52,7 +52,7 @@
         x="200"
         y="135"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
       >
         {{ state.settings.date }}
@@ -61,7 +61,7 @@
         x="20"
         y="170"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
       >
@@ -71,7 +71,7 @@
         x="0"
         y="180"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
       >
         <tspan v-for="(line, index) in state.settings.billedTo.split('\n')" :key="index" x="20" dy="1.3em">
@@ -82,7 +82,7 @@
         x="200"
         y="170"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
       >
@@ -92,7 +92,7 @@
         x="0"
         y="180"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
       >
         <tspan
@@ -108,13 +108,13 @@
         x="20"
         y="270"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
       >
         DESCRIPTION
       </text>
-      <text y="280" fill="#000" alignment-baseline="hanging" font-size="10">
+      <text y="280" fill="#000" dominant-baseline="hanging" font-size="10">
         <tspan v-for="item in state.settings.items" :key="item.id" x="20" dy="1.5em">
           {{ item.title }}
         </tspan>
@@ -123,7 +123,7 @@
         x="575"
         y="270"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
         text-anchor="end"
@@ -133,7 +133,7 @@
       <text
         y="280"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         text-anchor="end"
       >
@@ -146,7 +146,7 @@
         x="515"
         y="555"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
         text-anchor="end"
@@ -157,7 +157,7 @@
         x="575"
         y="555"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
         font-weight="bold"
         text-anchor="end"
@@ -168,7 +168,7 @@
         x="0"
         y="600"
         fill="#000"
-        alignment-baseline="hanging"
+        dominant-baseline="hanging"
         font-size="10"
       >
         <tspan x="20" dy="1.3em" font-weight="bold">Note</tspan>
