@@ -248,7 +248,7 @@ function loadFile(ev) {
     const data = JSON.parse(evt.target.result as string);
 
     Object.keys(data).map((key) => {
-      settings[key] = data[key];
+      state.settings[key] = data[key];
     });
   });
 
@@ -257,7 +257,7 @@ function loadFile(ev) {
 
 function saveJson() {
   const a = document.createElement("a");
-  const file = new Blob([JSON.stringify(settings)], {
+  const file = new Blob([JSON.stringify(state.settings)], {
     type: "application/json",
   });
 
