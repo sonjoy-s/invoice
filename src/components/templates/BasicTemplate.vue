@@ -131,15 +131,16 @@
         AMOUNT
       </text>
       <text
-        y="280"
+        v-for="(item, index) in state.settings.items"
+        :key="item.id"
+        x="575"
+        :y="295 + (index * 15)"
         fill="#000"
         dominant-baseline="hanging"
         font-size="10"
         text-anchor="end"
       >
-        <tspan v-for="item in state.settings.items" :key="item.id" x="575" dy="1.5em">
-          ${{ formatNumber(item.amount) }}
-        </tspan>
+        ${{ formatNumber(item.amount) }}
       </text>
       <rect x="20" y="545" width="555" height="1" fill="#D9D9D9" />
       <text
