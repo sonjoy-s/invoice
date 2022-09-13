@@ -19,15 +19,23 @@ const total = computed(function () {
   );
 });
 
+const markup = ref("<span>loading</span>");
+const invoice = computed( function () {
+  return parser(markup.value);
+});
+
 const mapper = {
   "%INVOICE_NUMBER%": "invoice",
   "%INVOICE_DATE%": "number",
   "%BILL_TO%": "billTo",
 };
-const markup = ref("");
-const invoice = computed( function () {
-  return markup.value;
-});
+
+function parser(svg) {
+  svg = svg.replace("%INVOICE_NUMBER%", state.settings.number);
+  svg = svg.replace("%INVOICE_DATE%", state.settings.date);
+
+  return svg;
+}
 
 function formatNumber(number) {
   if (typeof number !== "number") {

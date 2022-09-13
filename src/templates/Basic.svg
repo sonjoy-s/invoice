@@ -93,7 +93,7 @@
       dominant-baseline="hanging"
       font-size="10"
   >
-    <tspan x="200" dy="1.3em">%BILL_TO%</tspan>
+    <tspan x="200" dy="1.3em">%BILL_FROM%</tspan>
   </text>
   <text
       x="20"
