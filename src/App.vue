@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="preview">
-      <InvocieParser />
+      <BasicTemplate />
     </div>
     <div class="settings">
       <InvoiceSettings />
@@ -12,7 +12,6 @@
 <script setup>
 import BasicTemplate from "./components/templates/BasicTemplate.vue";
 import InvoiceSettings from "./components/InvoiceSettings.vue";
-import InvocieParser from "./components/templates/InvocieParser.vue";
 </script>
 
 <style lang="css" scoped>
