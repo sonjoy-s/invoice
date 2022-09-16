@@ -131,6 +131,18 @@
         </div>
       </div>
       <hr />
+      <div v-for="field in templateFields" class="field field__file">
+        <label class="label">{{ field.label }}</label>
+        <div class="control">
+          <input
+            v-model="field.value"
+            type="color"
+            class="input is-small"
+            placeholder="background color"
+          />
+        </div>
+      </div>
+      <hr />
       <div>
         <div class="tabs">
           <ul>
@@ -182,7 +194,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import {computed, ref} from "vue";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import state from "../compositions/settings.js";
@@ -194,6 +206,16 @@ import UploadIcon from "./icons/UploadIcon.vue";
 import {TDocumentDefinitions} from "pdfmake/interfaces";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+const templateFields = computed(function () {
+  const fields = [];
+
+  Object.keys(state.settings.templateSettings).forEach(key => {
+    fields.push(state.settings.templateSettings[key]);
+  });
+
+  return fields;
+})
 
 /*
  * Refs

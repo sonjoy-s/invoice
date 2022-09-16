@@ -8,12 +8,12 @@
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect width="595" height="842" fill="white" />
-      <rect width="695" height="100" fill="#D9D9D9" />
-      <rect y="822" width="695" height="20" fill="#D9D9D9" />
+      <rect width="695" height="100" :fill="state.settings.templateSettings.background.value" />
+      <rect y="822" width="695" height="20" :fill="state.settings.templateSettings.background.value" />
       <text
         x="20"
         y="45"
-        fill="#000"
+        :fill="state.settings.templateSettings.titleColor.value"
         dominant-baseline="hanging"
         font-size="50"
       >
@@ -142,7 +142,7 @@
       >
         ${{ formatNumber(item.amount) }}
       </text>
-      <rect x="20" y="545" width="555" height="1" fill="#D9D9D9" />
+      <rect x="20" y="545" width="555" height="1" :fill="state.settings.templateSettings.background.value" />
       <text
         x="515"
         y="555"
@@ -190,7 +190,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, reactive } from "vue";
 import state from "../../compositions/settings.js";
 
 const total = computed(function () {

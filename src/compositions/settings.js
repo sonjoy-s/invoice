@@ -18,6 +18,18 @@ const defaultSettings = {
     height: 35,
     width: 100,
   },
+  templateSettings: {
+    titleColor: {
+      label: "Title Color",
+      type: "color",
+      value: "#000000"
+    },
+    background: {
+      label: "Background Color",
+      type: "color",
+      value: "#D9D9D9"
+    }
+  }
 };
 
 function randomId() {
