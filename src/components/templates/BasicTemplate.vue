@@ -190,7 +190,7 @@
 </template>
 
 <script setup>
-import { computed, reactive } from "vue";
+import { computed } from "vue";
 import state from "../../compositions/settings.js";
 
 const total = computed(function () {
