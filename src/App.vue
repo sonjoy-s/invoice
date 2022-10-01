@@ -16,14 +16,12 @@ import InvoiceSettings from "./components/InvoiceSettings.vue";
 
 <style lang="css" scoped>
 .app-container {
-  display: flex;
-}
-.app-container .preview {
-  width: 595px;
-  height: 842px;
+  padding-left: 300px;
 }
 
 .app-container .settings {
-  padding: 10px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 </style>

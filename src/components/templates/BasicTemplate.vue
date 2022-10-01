@@ -209,8 +209,10 @@ function formatNumber(number) {
 </script>
 
 <style lang="css">
-#iframeContainer {
-  width: 595px;
+#iframeContainer svg {
   height: 842px;
+  width: auto;
+  max-height: 100vh;
+  display: block;
 }
 </style>
